@@ -103,6 +103,69 @@
     当前的时间为{{ data.value1 }}
 
   </div>
+  <!-- table -->
+
+  <div style="margin-bottom: 20px; width: 1000px;">
+    <el-table :data="tableData" style="width: 100%" stripe border height="500px">
+        <el-table-column fixed prop="date" label="Date" width="150" sortable/>
+    <el-table-column prop="name" label="Name" width="120" />
+    <el-table-column prop="state" label="State" width="120" />
+    <el-table-column prop="city" label="City" width="320" />
+    <el-table-column prop="address" label="Address" width="600" />
+    <el-table-column prop="zip" label="Zip" />
+    <el-table-column fixed="right" label="Operations" min-width="120">
+      <template #default="scope">
+        <el-button
+          link
+          type="primary"
+          size="small"
+          @click.prevent="deleteRow(scope.$index)"
+        >
+          Remove
+        </el-button>
+      </template>
+    </el-table-column>
+    </el-table>
+    
+  
+  <div style="margin: 10px 0;">
+    <el-pagination
+      v-model:current-page="currentPage4"
+      v-model:page-size="pageSize4"
+      :page-sizes="[10, 20, 30, 40]"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="tableData.length"
+      background
+    />
+  </div>
+
+  <el-button class="mt-4" style="width: 100%" @click="onAddItem">
+    Add Item
+  </el-button>
+
+  <div>
+    <el-button  @click="dialogVisible = true" type="primary">
+      <el-icon><Edit /></el-icon>
+    </el-button>
+
+    <el-dialog
+    v-model="dialogVisible"
+    title="Tips"
+    width="500"
+    :before-close="handleClose"
+  >
+    <span>This is a message</span>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button @click="dialogVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="dialogVisible = false">
+          Confirm
+        </el-button>
+      </div>
+    </template>
+  </el-dialog>
+  </div>
+  </div>
 
 </template>
 
@@ -111,6 +174,8 @@
 import { ref, reactive } from 'vue'
 import { Search } from '@element-plus/icons-vue';
 import img from '@/assets/logo.svg'
+import dayjs from 'dayjs'
+
 const data = reactive({
   input: null,
   input2: null,
@@ -119,8 +184,21 @@ const data = reactive({
   radio2: null,
   checkbox: [],
   value1: '',
+  currentPage4: 1,
+  pageSize4: 10,
 })
+//控制弹窗显示的变量
+const dialogVisible = ref(false)
 
+const handleClose = (done) => {
+  ElMessageBox.confirm('Are you sure to close this dialog?')
+    .then(() => {
+      done()
+    })
+    .catch(() => {
+      // catch error
+    })
+}
 
 const options = [
   { value: 'Option1', label: 'Option1' },
@@ -145,7 +223,126 @@ const srcList = [
   'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg',
 ]
 
+const tableData = ref([
+  {
+    date: '2016-05-03',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-02',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-04',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-01',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-03',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-02',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-04',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-01',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-03',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-02',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-04',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-01',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },{
+    date: '2016-05-03',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-02',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-04',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-01',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },{
+    date: '2016-05-03',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-02',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-04',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-01',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+])
+
 const res = ['香蕉', '菠萝']
+
+const deleteRow = (index) => {
+  tableData.value.splice(index, 1)
+}
+
+const now = new Date()
+
+const onAddItem = () => {
+  now.setDate(now.getDate() + 1)
+  tableData.value.push({
+    date: dayjs(now).format('YYYY-MM-DD'),
+    name: 'Tom',
+    state: 'California',
+    city: 'Los Angeles',
+    address: 'No. 189, Grove St, Los Angeles',
+    zip: 'CA 90036',
+  })
+}
 
 </script>
 
