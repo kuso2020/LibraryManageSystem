@@ -7,30 +7,50 @@ const router = createRouter({
 
     {
         path: '/',
-        redirect: 'manger'
+        redirect: '/manager/home'
     },
     {
-      path: '/manger',
-      name: 'manger',
-      component: () => import('@/views/Manger.vue'),
+      path: '/manager',
+      name: 'manager',
+      component: () => import('@/views/Manager.vue'),
       children: [
         {
           path: 'home',
           name: 'home',
+          meta: { title: '首页' },
           component: () => import('@/views/Home.vue')
         },
         {
           path: 'test',
           name: 'test',
+          meta: { title: '测试页面' },
           component: () => import('@/views/test.vue')
         },
 
       ]
     },
-    
+    {
+      path: '/404',
+      name: 'notFound',
+      meta: { title: '出错了' },
+      component: () => import('@/views/404.vue')
+  },
+
+
+
+  // 404 page must be placed at the end
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/404'
+  }
     
     
   ],
+})
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title
+  next()
 })
 
 export default router

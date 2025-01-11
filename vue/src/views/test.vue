@@ -1,6 +1,9 @@
 
 <template>
     <div>
+      <div style="margin-bottom: 30px;" >
+          <el-button type="primary" @click="router.back()">返回首页</el-button>
+      </div>
       <div style="background-color: red; font-size: 25px; font-weight : bolder;color : aqua; text-decoration: underline;">
           你好，欢迎使用图书管理系统！
   
@@ -136,7 +139,7 @@
   </template>
   
   
-  <script setup>
+<script setup>
   import { Edit, View, Delete, Search } from '@element-plus/icons-vue';
   import { SignatureKind } from 'typescript';
   import { reactive, ref } from 'vue';
@@ -187,5 +190,5 @@
   const clear = () => {
     data.cnt = 0;
   }
-  </script>
+</script>
   
