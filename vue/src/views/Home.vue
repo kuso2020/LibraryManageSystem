@@ -1,4 +1,21 @@
 <template>
+  <div style="margin-bottom : 20px;">
+    <RouterLink to = "/test">Test</RouterLink> |
+    <a href="/test">通过a跳转</a>
+    <!-- 通过按钮跳转 -->
+    
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <el-button type="primary" size="default" @click="router.push('/manger/test')">跳转到新页面</el-button>
+  </div>
+
+  <div>
+    <el-button type="primary" size="default" @click="router.push('/manger/test?id=1&name=hello')">
+      有传参的跳转（id = 1）
+    </el-button>
+    
+  </div>
 
   <div>
     <div style="margin-bottom: 20px;">
@@ -175,6 +192,8 @@ import { ref, reactive } from 'vue'
 import { Search } from '@element-plus/icons-vue';
 import img from '@/assets/logo.svg'
 import dayjs from 'dayjs'
+import { RouterLink } from 'vue-router';
+import router from '@/router/index';
 
 const data = reactive({
   input: null,

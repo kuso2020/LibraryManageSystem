@@ -140,6 +140,9 @@
   import { Edit, View, Delete, Search } from '@element-plus/icons-vue';
   import { SignatureKind } from 'typescript';
   import { reactive, ref } from 'vue';
+  import { useRouter } from 'vue-router';
+  const router = useRouter();
+
   // 两种方式声明变量
   // import { ref } from 'vue'
   const input = ref('')
@@ -148,38 +151,41 @@
   const a = ref(1);
   
   const data = reactive    ({
-      name: '张三',
-      age: 20,
-      sex: '男',
-      arr: [1, 2, 3, 15],
-      fruits: ['apple', 'banana', 'orange'],
-      cnt : 0,
-      box : {
-          color: 'red',
-          fontSize : '16px',
-          backgroundColor : 'blue',
-          width : '100px',
-          height : '100px',
-          lineHeight : '100px',
-          textAlign : 'center',
-          
+    id : router.currentRoute.value.query.id,
+    name: '张三',
+    age: 20,
+    sex: '男',
+    arr: [1, 2, 3, 15],
+    fruits: ['apple', 'banana', 'orange'],
+    cnt : 0,
+    box : {
+      color: 'red',
+      fontSize : '16px',
+      backgroundColor : 'blue',
+      width : '100px',
+      height : '100px',
+      lineHeight : '100px',
+      textAlign : 'center',
+      
+
+    },
   
-      },
-  
-      img : 'https://www.baidu.com/img/flexible/logo/pc/result.png',
-      input : '',
+    img : 'https://www.baidu.com/img/flexible/logo/pc/result.png',
+    input : '',
   });
   
+  console.log('传递的参数为', data.id)
+
   const click = () => {
-      data.cnt++;
+    data.cnt++;
   }
   
   const show = (value) => {
-      alert(value)
+    alert(value)
   }
   
   const clear = () => {
-      data.cnt = 0;
+    data.cnt = 0;
   }
   </script>
   
