@@ -26,6 +26,12 @@ const router = createRouter({
           meta: { title: '测试页面' },
           component: () => import('@/views/test.vue')
         },
+        {
+          path: 'data',
+          name: 'data',
+          meta: { title: '数据展示页面' },
+          component: () => import('@/views/data.vue')
+        },
 
       ]
     },
