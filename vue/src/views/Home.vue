@@ -147,8 +147,8 @@
   
   <div style="margin: 10px 0;">
     <el-pagination
-      v-model:current-page="currentPage4"
-      v-model:page-size="pageSize4"
+      v-model:current-page="data.currentPage4"
+      v-model:page-size="data.pageSize4"
       :page-sizes="[10, 20, 30, 40]"
       layout="total, sizes, prev, pager, next, jumper"
       :total="tableData.length"
