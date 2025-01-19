@@ -40,7 +40,7 @@
             <span>用户管理</span>
           </template>
           <el-menu-item index="">管理员用户信息</el-menu-item>
-          <el-menu-item index="">普通用户信息</el-menu-item>
+          <el-menu-item index="/manager/Staff">员工信息</el-menu-item>
           <el-menu-item index="">VIP用户信息</el-menu-item>
           
         </el-sub-menu>
@@ -78,10 +78,8 @@
 
 <script setup>
 import router from '@/router';
-import { DataAnalysis, House, SwitchButton } from '@element-plus/icons-vue';
-import { RouterView } from 'vue-router';
 import { reactive, toRefs } from 'vue'
-import { useCursor } from 'element-plus';
+
 const state = reactive({
   circleUrl:
     'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',

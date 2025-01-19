@@ -36,14 +36,19 @@ public class StaffController {
         return Result.success();
     }
 
+    @DeleteMapping("/deleteBatch")
+    public Result deleteBatch(@RequestBody List<Integer> ids) {
+        staffService.deleteBatchById(ids);
+        return Result.success();
+    }
 
     /**
     * 查询所有
     */
 
     @GetMapping("/selectAll")
-    public Result selectAll(){
-        List<Staff> list = staffService.selectAll();
+    public Result selectAll(Staff staff) {
+        List<Staff> list = staffService.selectAll(staff);
         return Result.success(list);
     }
 //    @GetMapping("/selectOne")
@@ -70,9 +75,10 @@ public class StaffController {
     * pageSize: 每页个数
     * */
     @GetMapping("/selectPage")
-    public Result selectByPage(@RequestParam(defaultValue = "1") Integer pageNum,
+    public Result selectByPage(Staff staff,
+            @RequestParam(defaultValue = "1") Integer pageNum,
                                @RequestParam(defaultValue = "7") Integer pageSize){
-        PageInfo<Staff> pageInfo= staffService.selectPage(pageNum, pageSize);
+        PageInfo<Staff> pageInfo= staffService.selectPage(staff,pageNum, pageSize);
         return Result.success(pageInfo);
     }
 

@@ -21,8 +21,8 @@ public class StaffService {
 
 
 
-    public List<Staff> selectAll() {
-        return staffMapper.selectAll();
+    public List<Staff> selectAll(Staff staff) {
+        return staffMapper.selectAll(staff);
     }
 
 
@@ -30,9 +30,9 @@ public class StaffService {
         return staffMapper.selectById(id);
     }
 
-    public PageInfo<Staff> selectPage(Integer pageNum, Integer pageSize) {
+    public PageInfo<Staff> selectPage(Staff staff,Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Staff> list = staffMapper.selectAll();
+        List<Staff> list = staffMapper.selectAll(staff);
         return PageInfo.of(list);
     }
 
@@ -42,6 +42,12 @@ public class StaffService {
 
     public void deleteById(Integer id) {
         staffMapper.deleteById(id);
+    }
+
+    public void deleteBatchById(List<Integer> ids) {
+        for (int i = 0; i < ids.size(); i++) {
+            staffMapper.deleteById(ids.get(i));
+        }
     }
 
 

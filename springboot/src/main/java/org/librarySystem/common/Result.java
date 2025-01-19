@@ -8,7 +8,7 @@ public class Result {
 
     public static Result success() {
         Result result = new Result();
-        result.setCode("250");
+        result.setCode("200");
         result.setMsg("请求成功");
         return result;
     }
@@ -21,7 +21,7 @@ public class Result {
 
     public static Result error() {
         Result result = new Result();
-        result.setCode("350");
+        result.setCode("500");
         result.setMsg("系统错误");
         return result;
     }

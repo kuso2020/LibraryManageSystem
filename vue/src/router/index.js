@@ -32,6 +32,12 @@ const router = createRouter({
           meta: { title: '数据展示页面' },
           component: () => import('@/views/data.vue')
         },
+        {
+          path: 'Staff',
+          name: 'Staff',
+          meta: { title: '员工信息表' },
+          component: () => import('@/views/Staff.vue')
+        },
 
       ]
     },

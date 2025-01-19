@@ -194,6 +194,7 @@ import img from '@/assets/logo.svg'
 import dayjs from 'dayjs'
 import { RouterLink } from 'vue-router';
 import router from '@/router/index';
+import request from '@/utils/request';
 
 const data = reactive({
   input: null,
@@ -205,6 +206,13 @@ const data = reactive({
   value1: '',
   currentPage4: 1,
   pageSize4: 10,
+  staffList: []
+})
+
+request.get("staff/selectAll").then(res => {
+  console.log(res)
+  data.staffList = res.data
+  console.log(data.staffList)
 })
 //控制弹窗显示的变量
 const dialogVisible = ref(false)
