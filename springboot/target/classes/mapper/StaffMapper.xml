@@ -17,7 +17,11 @@
     </delete>
 
     <select id="selectAll" resultType="org.librarySystem.entity.Staff">
-        select * from `staff` where id = #{id}
+        select * from `staff`
+        <where>
+            <if test="name != null">name like concat('%',#{name}, '%')</if>
+        </where>
+        order by id desc
     </select>
 
 </mapper>
