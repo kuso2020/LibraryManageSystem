@@ -91,7 +91,7 @@
     <!-- 当使用el-image时，src使用本地图片要导入 -->
      <!-- srcList 是一个数组，可以预览多张图片 -->
     <el-image 
-    :src="img" style="width: 300px; margin-left: 100;"
+    :src="img" style="width: 300px; margin-left: 100px;"
     :preview-src-list="srcList"
     ></el-image>
   </div>
@@ -195,6 +195,7 @@ import dayjs from 'dayjs'
 import { RouterLink } from 'vue-router';
 import router from '@/router/index';
 import request from '@/utils/request';
+import {ElMessageBox} from "element-plus";
 
 const data = reactive({
   input: null,
@@ -209,11 +210,6 @@ const data = reactive({
   staffList: []
 })
 
-request.get("staff/selectAll").then(res => {
-  console.log(res)
-  data.staffList = res.data
-  console.log(data.staffList)
-})
 //控制弹窗显示的变量
 const dialogVisible = ref(false)
 

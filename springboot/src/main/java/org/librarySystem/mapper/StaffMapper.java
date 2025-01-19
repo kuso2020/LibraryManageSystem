@@ -20,4 +20,5 @@ public interface StaffMapper {
     void deleteById(Integer id);
 
 
+    Staff selectByUsername(String username);
 }

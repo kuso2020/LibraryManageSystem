@@ -1,52 +1,70 @@
 package org.librarySystem.controller;
 
+import jakarta.annotation.Resource;
+import org.librarySystem.Service.AdminService;
+import org.librarySystem.Service.StaffService;
 import org.librarySystem.common.Result;
+import org.librarySystem.entity.Account;
+import org.librarySystem.entity.Admin;
+import org.librarySystem.entity.ChangePasswordDTO;
+import org.librarySystem.entity.Staff;
 import org.librarySystem.exception.CustomException;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.librarySystem.mapper.StaffMapper;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
 @RestController
 public class WebController {
 
+    @Resource
+    private StaffService staffService;
+
+    @Resource
+    private AdminService adminService;
+
     @GetMapping("/hello")
     public Result hello() {
         return Result.success("hello");
     }
 
-    @GetMapping("/weather")
-    public Result weather() {
-        return Result.success("今天天气：25摄氏度 晴");
-    }
+    /**
+     *  admin or staff login
+     * @return
+     */
+    @PostMapping("/login")
+    public Result login(@RequestBody Account staff) {
+        Account account = null;
+        if ("EMP".equals(staff.getRole())) {
+            account = staffService.login(staff);
+        } else if ("ADMIN".equals(staff.getRole())) {
+            account =adminService.login(staff);
+        } else {
+            throw new CustomException("003", "Invalid role");
+        }
 
-//    @GetMapping("/count")
-////    @ResponseBody
-//    public Integer count() {
-////        System.out.println("Returning count: 15");
-//        return 15;
-//    }
-    @GetMapping("/count")
-
-    public Result count() {
-        return Result.success(5);
+        return Result.success(account);
     }
-    @GetMapping("/test")
-    public Result test(){
-        int a = 1/0;
+    @PostMapping("/register")
+    public Result register(@RequestBody Staff staff) {
+        staffService.register(staff);
+        return Result.success();
+    }
+    @PutMapping("/changePassword")
+    public Result changePassword(@RequestBody ChangePasswordDTO account) {
+        if ("EMP".equals(account.getRole())){
+            staffService.changePassword(account);
+        }else if ("ADMIN".equals(account.getRole())){
+            adminService.changePassword(account);
+        }else{
+            throw new CustomException("003", "Invalid role");
+        }
         return Result.success();
     }
 
-    @GetMapping("/test2")
-    public Result test2() {
-//        Map<String, Integer> map = new HashMap<>();
-//        map.put("count", 15);
-//        return Result.success(map);
-//        throw new RuntimeException("错误，禁止请求");
-        throw new CustomException("400", "业务错误");
-    }
-
 }
+
+

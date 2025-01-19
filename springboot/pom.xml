@@ -52,7 +52,12 @@
 			<version>1.4.6</version>
 		</dependency>
 		<!-- 分页插件pagehelper -->
-
+		<!-- 加密插件bcrypt -->
+		<dependency>
+			<groupId>org.mindrot</groupId>
+			<artifactId>jbcrypt</artifactId>
+			<version>0.4</version> <!-- 请确保使用最新版本 -->
+		</dependency>
 	</dependencies>
 
 	<build>

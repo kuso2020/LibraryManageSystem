@@ -177,7 +177,7 @@
     input : '',
   });
   
-  console.log('传递的参数为', data.id)
+  // console.log('传递的参数为', data.id)
 
   const click = () => {
     data.cnt++;

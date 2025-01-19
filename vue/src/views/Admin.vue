@@ -48,7 +48,7 @@
 
 
     </div>
-    <el-dialog v-model="data.dialogFormVisible" title="请输入添加员工的信息" width="500" destroy-on-close>
+    <el-dialog v-model="data.dialogFormVisible" title="请输入添加管理员的信息" width="500" destroy-on-close>
       <el-form ref = "formRef" :rules = "data.rules" :model="data.form" style = "padding-right: 50px; padding-top: 30px;">
         <el-form-item prop="username" label="用户名" :label-width="formLabelWidth">
           <el-input v-model="data.form.username" autocomplete="off" placeholder = "请输入用户名"/>
@@ -61,21 +61,6 @@
 <!--        </el-form-item>-->
         <el-form-item label="姓名" :label-width="formLabelWidth" prop="name">
           <el-input v-model="data.form.name" autocomplete="off" placeholder = "请输入姓名"/>
-        </el-form-item>
-        <el-form-item label="性别" :label-width="formLabelWidth">
-         <el-radio-group v-model="data.form.gender">
-           <el-radio value = "男" label = "男"></el-radio>
-           <el-radio value = "女" label = "女"></el-radio>
-         </el-radio-group>
-        </el-form-item>
-        <el-form-item label="NO" :label-width="formLabelWidth" prop="no">
-          <el-input v-model="data.form.no" autocomplete="off" placeholder = "请输入NO" />
-        </el-form-item>
-        <el-form-item label="年龄" :label-width="formLabelWidth">
-          <el-input-number style="width: 200px ;" :min = "18" v-model="data.form.age" autocomplete="off" placeholder = "请输入年龄" />
-        </el-form-item>
-        <el-form-item label="个人简介" :label-width="formLabelWidth">
-          <el-input type="textarea" v-model="data.form.description" autocomplete="off" placeholder = "请输入简介" />
         </el-form-item>
       </el-form>
       <template #footer>
@@ -117,10 +102,6 @@ const data = reactive({
       { required: true, message: '请输入姓名', trigger: 'blur' },
       { min: 2, max: 50, message: '长度在 2 到 50 个字符', trigger: 'blur' }
     ],
-    no: [
-      { required: true, message: '请输入NO', trigger: 'blur' },
-      { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
-    ],
   },
 });
 
@@ -135,35 +116,10 @@ const columns = [
     label: '姓名',
     width: '100',
   },
-  {
-    id: 'gender',
-    label: '性别',
-    width: '100',
-  },
-  {
-    id: 'no',
-    label: 'NO',
-    width: '100',
-  },
-  {
-    id: 'age',
-    label: '年龄',
-    width: '100',
-  },
-  {
-    id: 'description',
-    label: '简介',
-    width: '300',
-  },
-  {
-    id: 'department',
-    label: '部门',
-    width: '300',
-  },
 ]
 
 const load = ()=>{
-  request.get('staff/selectPage', {
+  request.get('admin/selectPage', {
         params : {
           pageNum: data.currentPage,
           pageSize: data.pageSize,
@@ -191,7 +147,7 @@ const save = () => { //新增和编辑
 }
 
 const edit = () => {
-  request.put('staff/update', data.form).then(res => {
+  request.put('admin/update', data.form).then(res => {
     if (res.code === '200') {
       ElMessage.success('修改成功')
       data.dialogFormVisible = false
@@ -204,7 +160,7 @@ const edit = () => {
 }
 
 const add = () => {
-  request.post('staff/Post', data.form).then(res => {
+  request.post('admin/Post', data.form).then(res => {
     if (res.code === '200') {
       ElMessage.success('添加成功')
       data.dialogFormVisible = false
@@ -230,8 +186,8 @@ const handleEdit = (row) => {
 }
 
 const handleDelete = (row) => {
-  ElMessageBox.confirm('删除后将无法恢复，您确认要删除该员工吗？', '确认删除', {type: 'warning'}).then(() => {
-    request.delete('staff/delete', {params: {id: row.id}}).then(res => {
+  ElMessageBox.confirm('删除后将无法恢复，您确认要删除该管理员吗？', '确认删除', {type: 'warning'}).then(() => {
+    request.delete('admin/delete', {params: {id: row.id}}).then(res => {
       if (res.code === '200') {
         ElMessage.success('删除成功')
         load()
@@ -256,7 +212,7 @@ const delteBatch = () => {
     return
   }
   ElMessageBox.confirm('删除后将无法恢复，您确认要删除所选员工吗？', '确认删除', {type: 'warning'}).then(() => {
-    request.delete('staff/deleteBatch', {data: data.ids}).then(res => {
+    request.delete('admin/deleteBatch', {data: data.ids}).then(res => {
       if (res.code === '200') {
         ElMessage.success('删除成功')
         load()

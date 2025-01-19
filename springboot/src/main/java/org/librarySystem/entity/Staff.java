@@ -1,42 +1,13 @@
 package org.librarySystem.entity;
 
-public class Staff {
-    private Integer id;
-    private String name;
+public class Staff extends Account {
+
     private String gender;
     private String no;
     private Integer age;
     private String description;
     private Integer departmentId;
 
-    @Override
-    public String toString() {
-        return "Staff{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", gender='" + gender + '\'' +
-                ", no='" + no + '\'' +
-                ", age=" + age +
-                ", description='" + description + '\'' +
-                ", departmentId=" + departmentId +
-                '}';
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getGender() {
         return gender;

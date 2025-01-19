@@ -4,11 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "org.librarySystem.mapper.StaffMapper">
     <insert id="insert" parameterType="org.librarySystem.entity.Staff">
-        insert into `staff` (name, gender, no, age, description, department_id)
-        values (#{name}, #{gender}, #{no}, #{age}, #{description}, #{departmentId})
+        insert into `staff` (username,password,role,name, gender, no, age, description, department_id)
+        values (#{username},#{password},#{role},#{name}, #{gender}, #{no}, #{age}, #{description}, #{departmentId})
     </insert>
     <update id="updateById" parameterType="org.librarySystem.entity.Staff">
-        update `staff` set name = #{name}, gender = #{gender}, no = #{no}, age = #{age},
+        update `staff` set username = #{username}, password = #{password}, role = #{role}, name = #{name}, gender = #{gender}, no = #{no}, age = #{age},
             description = #{description}, department_id = #{departmentId}
         where id = #{id}
     </update>
@@ -22,6 +22,9 @@
             <if test="name != null">name like concat('%',#{name}, '%')</if>
         </where>
         order by id desc
+    </select>
+    <select id="selectByUsername" resultType="org.librarySystem.entity.Staff">
+        select * from `staff` where username = #{username}
     </select>
 
 </mapper>

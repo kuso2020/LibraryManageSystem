@@ -39,7 +39,7 @@
             <el-icon><User /></el-icon>
             <span>用户管理</span>
           </template>
-          <el-menu-item index="">管理员用户信息</el-menu-item>
+          <el-menu-item index="/manager/Admin">管理员用户信息</el-menu-item>
           <el-menu-item index="/manager/Staff">员工信息</el-menu-item>
           <el-menu-item index="">VIP用户信息</el-menu-item>
           
@@ -50,11 +50,15 @@
           <span>数据统计</span>
         </el-menu-item>
         
-        <el-menu-item index="">
-          <el-icon><setting /></el-icon>
-          <span>设置</span>
+        <el-menu-item index="Person">
+          <el-icon><User /></el-icon>
+          <span>个人中心</span>
         </el-menu-item>
-        <el-menu-item index="">
+          <el-menu-item index="updatePassword">
+            <el-icon><Lock /></el-icon>
+            <span>修改密码</span>
+          </el-menu-item>
+        <el-menu-item @click="logout">
           <el-icon><SwitchButton /></el-icon>
           <span>退出登录</span>
         </el-menu-item>
@@ -64,7 +68,7 @@
 
       <!-- 右侧主体部分开始 -->
     <div style="flex: 1; width: 0; background-color: #f7f5f8; padding: 10px;">
-      <RouterView/>
+      <RouterView @updateUser = "updateUser"/>
     </div>
     <!-- 右侧主体部分结束 -->
 
@@ -87,11 +91,32 @@ const state = reactive({
     'https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png',
   sizeList: ['small', '', 'large'],
 })
+
+const data = reactive({
+  token: JSON.parse(localStorage.getItem('token')),
+});
+// const token = JSON.parse(localStorage.getItem('token'))
+
+
+
 const users = reactive({
-  name: 'admin',
+  name: data.token.name,
   avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
   roles: ['admin', 'user'],
 })
+
+// console.log(JSON.parse(localStorage.getItem('token')))
+
+const logout = () => {
+  localStorage.removeItem('token')
+  router.push('/login')
+}
+
+const updateUser = () => {
+  data.token = JSON.parse(localStorage.getItem('token'))
+  users.name = data.token.name
+  // console.log(data.token)
+}
 
 </script>
 
@@ -100,4 +125,5 @@ const users = reactive({
  .el-menu-item.is-active{
     background-color: #ecf5ff !important;
   }
+
 </style>
