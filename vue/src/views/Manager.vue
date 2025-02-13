@@ -10,7 +10,7 @@
     <div style="flex: 1"></div>
     <div style="width: fit-content; display: flex; align-items: center;padding-right: 10px;">
       <!-- 头像 -->
-      <el-avatar :size="40" :src="state.circleUrl" />
+      <el-avatar :size="40" :src="users.avatar" />
       <span style="margin-left: 10px; font-size: 16px; color: #fff;">{{users.name}}</span>
     </div>
   </div>
@@ -101,7 +101,7 @@ const data = reactive({
 
 const users = reactive({
   name: data.token.name,
-  avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
+  avatar: data.token.avatar || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
   roles: ['admin', 'user'],
 })
 
@@ -115,6 +115,7 @@ const logout = () => {
 const updateUser = () => {
   data.token = JSON.parse(localStorage.getItem('token'))
   users.name = data.token.name
+  users.avatar = data.token.avatar || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
   // console.log(data.token)
 }
 

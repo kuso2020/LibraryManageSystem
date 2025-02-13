@@ -1,12 +1,27 @@
 <template>
   <div class="card" style="width: 40%; margin: 0; padding: 40px 20px">
     <el-form ref = "formRef" :rules = "data.rules" :model="data.form" style = "padding-right: 50px; padding-top: 30px;">
+      <el-form-item label="头像" :label-width="formLabelWidth" prop="avatar" style="display: flex; align-items: center;">
+
+        <el-upload
+            class="avatar-uploader"
+            action="http://localhost:8080/files/upload"
+            :show-file-list="false"
+            :before-upload="beforeAvatarUpload"
+            :on-success="handleAvatarSuccess"
+        >
+          <img v-if="data.form.avatar" :src="data.form.avatar" class="avatar" alt="avatar" />
+          <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+        </el-upload>
+
+      </el-form-item>
       <el-form-item  prop="username" label="用户名" :label-width="formLabelWidth">
         <el-input disabled v-model="data.form.username" autocomplete="off" placeholder = "请输入用户名"/>
       </el-form-item>
       <el-form-item label="姓名" :label-width="formLabelWidth" prop="name">
         <el-input v-model="data.form.name" autocomplete="off" placeholder = "请输入姓名"/>
       </el-form-item>
+
       <div v-if="data.user.role === 'EMP'">
         <el-form-item label="性别" :label-width="formLabelWidth">
           <el-radio-group v-model="data.form.gender">
@@ -49,6 +64,7 @@ const formLabelWidth = '140px'
 const data = reactive({
   user: JSON.parse(localStorage.getItem('token')),
   form: {
+    avatar: '',
   },
   rules: {
     username: [
@@ -101,9 +117,59 @@ const update = () => {
   }
 }
 
+const beforeAvatarUpload = (file) => {
+  const isJPG = file.type === 'image/jpeg'
+  const isPNG = file.type === 'image/png'
+  const isLt2M = file.size / 1024 / 1024 < 2
+
+  if (!isJPG && !isPNG) {
+    ElMessage.error('上传头像图片只能是 JPG 或者 PNG 格式!')
+    return false
+  }
+  if (!isLt2M) {
+    ElMessage.error('上传头像图片大小不能超过 2MB!')
+    return false
+  }
+  return true
+}
+
+const handleAvatarSuccess = (res) => {
+  data.form.avatar = res.data
+}
+
+
 
 </script>
 
 <style scoped>
 
+</style>
+
+<style>
+.avatar-uploader .el-upload {
+  border: 1px dashed var(--el-border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: var(--el-transition-duration-fast);
+}
+
+.avatar-uploader .el-upload:hover {
+  border-color: var(--el-color-primary);
+}
+
+.el-icon.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
 </style>

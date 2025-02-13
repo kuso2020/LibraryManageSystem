@@ -4,12 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "org.librarySystem.mapper.StaffMapper">
     <insert id="insert" parameterType="org.librarySystem.entity.Staff">
-        insert into `staff` (username,password,role,name, gender, no, age, description, department_id)
-        values (#{username},#{password},#{role},#{name}, #{gender}, #{no}, #{age}, #{description}, #{departmentId})
+        insert into `staff` (username,password,role,name, gender, no, age, description, department_id, avatar)
+        values (#{username},#{password},#{role},#{name}, #{gender}, #{no}, #{age}, #{description}, #{departmentId}, #{avatar})
     </insert>
     <update id="updateById" parameterType="org.librarySystem.entity.Staff">
         update `staff` set username = #{username}, password = #{password}, role = #{role}, name = #{name}, gender = #{gender}, no = #{no}, age = #{age},
-            description = #{description}, department_id = #{departmentId}
+            description = #{description}, department_id = #{departmentId}, avatar = #{avatar}
         where id = #{id}
     </update>
     <delete id="deleteById">

@@ -58,6 +58,12 @@
 			<artifactId>jbcrypt</artifactId>
 			<version>0.4</version> <!-- 请确保使用最新版本 -->
 		</dependency>
+		<!--hutool工具类-->
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-all</artifactId>
+			<version>5.8.24</version>
+		</dependency>
 	</dependencies>
 
 	<build>

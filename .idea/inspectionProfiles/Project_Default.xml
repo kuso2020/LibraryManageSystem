@@ -7,11 +7,12 @@
     <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="4">
+          <list size="5">
             <item index="0" class="java.lang.String" itemvalue="setup" />
             <item index="1" class="java.lang.String" itemvalue="#footer" />
             <item index="2" class="java.lang.String" itemvalue="#default" />
             <item index="3" class="java.lang.String" itemvalue="scoped" />
+            <item index="4" class="java.lang.String" itemvalue="v-if" />
           </list>
         </value>
       </option>
@@ -20,7 +21,7 @@
     <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="30">
+          <list size="32">
             <item index="0" class="java.lang.String" itemvalue="nobr" />
             <item index="1" class="java.lang.String" itemvalue="noembed" />
             <item index="2" class="java.lang.String" itemvalue="comment" />
@@ -51,6 +52,8 @@
             <item index="27" class="java.lang.String" itemvalue="el-input-number" />
             <item index="28" class="java.lang.String" itemvalue="el-radio-group" />
             <item index="29" class="java.lang.String" itemvalue="el-radio" />
+            <item index="30" class="java.lang.String" itemvalue="el-upload" />
+            <item index="31" class="java.lang.String" itemvalue="Plus" />
           </list>
         </value>
       </option>

@@ -4,11 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "org.librarySystem.mapper.AdminMapper">
     <insert id="insert" parameterType="org.librarySystem.entity.Admin">
-        insert into `admin` (username,password,role,name)
-        values (#{username},#{password},#{role},#{name})
+        insert into `admin` (username,password,role,name, avatar)
+        values (#{username},#{password},#{role},#{name}, #{avatar})
     </insert>
     <update id="updateById" parameterType="org.librarySystem.entity.Admin">
-        update `admin` set username = #{username}, password = #{password}, role = #{role}, name = #{name}
+        update `admin` set username = #{username}, password = #{password}, role = #{role}, name = #{name}, avatar = #{avatar}
         where id = #{id}
     </update>
     <delete id="deleteById">
